@@ -13,8 +13,8 @@
       href="https://fonts.googleapis.com/css?family=DM+Sans"
       rel="stylesheet"
     />
-    <script src="https://smtpjs.com/v3/smtp.js" defer>
-    </script>
+    <script src="js/contact.js" defer></script>
+
   </head>
   <body>
     <div class="topnav" id="myTopnav">
@@ -33,7 +33,7 @@
       </div>
     </div>
 
-    <form name="contact" id="contact" action="contact.html" method="get" onsubmit="return ;" style="display:flex; flex-direction: column; gap: 20px;">
+    <form name="contact" id="contact" action="contact.html" onsubmit="validateContact();" style="display:flex; flex-direction: column; gap: 20px; background-color: #000; padding:20px;">
       <div class="formData">
         <label>Prénom *</label><br />
         <input
@@ -59,7 +59,7 @@
       </div>
       <div class="formData">
         <label>Objet *</label><br />
-        <input class="text-control" id="objet" name="objet"/>
+        <input type="text" class="text-control" id="objet" name="objet"/>
         <br/>
       </div>
       <div class="formData" style="display: flex;">
@@ -67,14 +67,14 @@
         <textarea name="message" id="message" style="height:200px; width:90%;"></textarea>
       </div>
       <div class="formData">
-        <input class="checkbox-input" type="checkbox" id="checkbox1" checked />
-        <label class="checkbox2-label" for="checkbox1" required>
+        <input class="checkbox-input" type="checkbox" id="checkboxDonnee"   />
+        <label class="checkbox2-label" for="checkboxDonnee" required>
           <span class="checkbox-icon"></span>
           J'ai lu et accepté les conditions d'utilisation.
         </label>
         <br />
-        <input class="checkbox-input" type="checkbox" id="checkbox2" />
-        <label class="checkbox2-label" for="checkbox2">
+        <input class="checkbox-input" type="checkbox" id="checkboxRGPD" />
+        <label class="checkbox2-label" for="checkboxRGPD" required>
           <span class="checkbox-icon"></span>
           J'autorise ce site a conserver mes données personnelles transmises via
           ce formulaire. Aucune exploitation commerciale ne sera faite des

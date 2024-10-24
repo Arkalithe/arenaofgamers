@@ -1,14 +1,18 @@
-let formContact = document.getElementById("contact");
 
-function valideForm() {
-  const name = document.getElementById("name").value;
-  const surname = document.getElementById("surname").value;
-  const email = document.getElementById("email").value;
-  const object
+function validateContact(e){
+    console.log("dazdz")
+    const name = document.getElementById("name").value;
+    const surname = document.getElementById("surname").value;
+    const email = document.getElementById("email").value;
+    const objet = document.getElementById("objet").value;
+    const message = document.getElementById("message").value;
+    const utilisationDonnees = document.getElementById("checkboxDonnee").checked;
+    const caseRGPD = document.getElementById("checkboxRGPD").checked
 
-  if (!name || !email || !phone) {
-    alert("Remplissez tous les champs");
+  if (!name || !surname || !email || !objet || !message || !utilisationDonnees|| !caseRGPD) {
+    alert("Remplissez tous les champs !!!");
+    event.preventDefault();
   } else {
-    alert("Inscription validée");
+    alert("Votre message a bien été envoyé ");
   }
 }
