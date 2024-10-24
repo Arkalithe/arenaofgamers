@@ -4,16 +4,17 @@ const path = require('path');
 const socketIo = require('socket.io');
 const { Sequelize, DataTypes } = require('sequelize');
 
-const sequelize = new Sequelize('arenagamer', 'root', '', {
+const sequelize = new Sequelize('arenagamers', 'root', '', {
     host: 'localhost',
     dialect: 'mysql'
 });
 
 const inscription = sequelize.define('inscription', {
     id: {
-        type: DataTypes.number,
-        allowNull: false,
-        autoIncrement: true
+        type: DataTypes.INTEGER,
+
+        autoIncrement: true,
+        primaryKey: true
     },
     prenom: {
         type: DataTypes.STRING,
@@ -32,21 +33,27 @@ const inscription = sequelize.define('inscription', {
         allowNull: false
     },
     numberIn: {
-        type: DataTypes.NUMBER,
+        type: DataTypes.INTEGER,
         allowNull: false
     },
     townId: {
-        type: DataTypes.NUMBER,
-        allowNull: false
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references: {
+            model: 'town',
+            key: 'id'
+        }
+
     },
 }, {
     timestamps: true
 });
 const town = sequelize.define('town', {
     id: {
-        type: DataTypes.NUMBER,
+        type: DataTypes.INTEGER,
         allowNull: false,
-        autoIncrement: true
+        autoIncrement: true,
+        primaryKey: true
     },
     nom: {
         type: DataTypes.STRING,
@@ -55,6 +62,50 @@ const town = sequelize.define('town', {
 }, {
     timestamps: true
 });
+
+const event = sequelize.define('event', {
+    id: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true
+    },
+    title: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+    description: {
+        type: DataTypes.STRING,
+        allowNull: false},
+    imageId: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references: {
+            model: 'images',
+            key: 'id'
+        }
+    }
+}, {
+    timestamps: true
+});
+const image = sequelize.define('image', {
+    id: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true
+    },
+    path: {
+        type: DataTypes.STRING,
+        allowNull: false
+    }
+}, {
+    timestamps: true
+});
+
+
+
+inscription.hasOne(town, { foreignKey: 'id' });
 
 sequelize.sync().then(() => {
     console.log('Base de données synchronisée');
