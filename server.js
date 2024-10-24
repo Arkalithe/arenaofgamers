@@ -4,17 +4,51 @@ const path = require('path');
 const socketIo = require('socket.io');
 const { Sequelize, DataTypes } = require('sequelize');
 
-const sequelize = new Sequelize('chat_db', 'root', '', {
+const sequelize = new Sequelize('arenagamer', 'root', '', {
     host: 'localhost',
     dialect: 'mysql'
 });
 
-const Message = sequelize.define('Message', {
-    username: {
+const inscription = sequelize.define('inscription', {
+    id: {
+        type: DataTypes.number,
+        allowNull: false,
+        autoIncrement: true
+    },
+    prenom: {
         type: DataTypes.STRING,
         allowNull: false
     },
-    message: {
+    nom: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+    email: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+    birthDate: {
+        type: DataTypes.DATE,
+        allowNull: false
+    },
+    numberIn: {
+        type: DataTypes.NUMBER,
+        allowNull: false
+    },
+    townId: {
+        type: DataTypes.NUMBER,
+        allowNull: false
+    },
+}, {
+    timestamps: true
+});
+const town = sequelize.define('town', {
+    id: {
+        type: DataTypes.NUMBER,
+        allowNull: false,
+        autoIncrement: true
+    },
+    nom: {
         type: DataTypes.STRING,
         allowNull: false
     }
