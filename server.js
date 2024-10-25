@@ -191,7 +191,7 @@ io.on('connection', (socket) => {
         if (!validator.isEmail(data.email)) {
             errors.push("L'email est invalide.");
         }
-        if (!validator.isDate(data.birthdate) && validator.isBefore( Date.now().toString())) {
+        if (!validator.isDate(data.birthdate) && validator.isBefore(Date.now().toString())) {
             errors.push("La date de naissance est invalide.");
         }
         if (!validator.isInt(data.quantity, { min: 0, max: 99 })) {

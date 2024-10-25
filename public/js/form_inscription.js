@@ -89,10 +89,8 @@ socket.on('validationError', (data) => {
 socket.emit('getUpcomingEvents');
 socket.on('upcomingEvents', (events) => {
     console.log('Événements à venir:', events);
-
     const upcomingList = document.getElementById('upcoming-list');
     upcomingList.innerHTML = '';
-
     events.map(event => {
         const listItem = document.createElement('li');
         listItem.textContent = `${event.title} - ${new Date(event.date).toLocaleDateString()}`;
