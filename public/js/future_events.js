@@ -60,17 +60,12 @@ function modalOpen(index){
 
 
 
-
-socket.emit('getPastEvents');
-socket.on('pastEvents', (events) => {
-    const pastList = document.querySelector('.past-list');
-
-
-    
-    pastList.innerHTML = '';
-    
+socket.emit('getUpcomingEvents');
+socket.on('upcomingEvents', (events) => {
+    console.log('Événements à venir:', events);
+    const upcomingList = document.querySelector('.upcoming-list');
+    upcomingList.innerHTML = '';
     events.forEach(event => {
-        console.log(pastList);
         console.log("RECUPERATION DES DONNEES: "+ event.path);
 
         const listItem = document.createElement('div');
@@ -103,12 +98,7 @@ socket.on('pastEvents', (events) => {
         listItem.appendChild(image);
         listItem.appendChild(background);
 
-        pastList.appendChild(listItem);        
+        upcomingList.appendChild(listItem);        
 
     });
-
-
-
-
-    
 });

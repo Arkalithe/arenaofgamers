@@ -5,7 +5,7 @@ const socketIo = require('socket.io');
 const { Sequelize, DataTypes, Op  } = require('sequelize');
 const validator = require('validator');
 
-const sequelize = new Sequelize('arenagamers', 'root', '', {
+const sequelize = new Sequelize('arenagamers', 'root', 'root', {
     host: 'localhost',
     dialect: 'mysql'
 });
