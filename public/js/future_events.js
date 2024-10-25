@@ -46,14 +46,16 @@ function showEventCards(events){
 
 function modalOpen(index){
 
-    const event = eventBoard[index];
+    const event = eventList[index];
     const eventDiv = document.querySelector('.eventDetails');
-    eventDiv.innerHTML=`        
-        <div><h2 class='modalE-title'>${event.title}</h2><img src=${event.path}></div>
-        <p class='modalE-p'> Organisé le <span>${event.createdAt}</span></p>
-        <p class='modalE-p'><span>${event.description}</span></p>
-        </div>
-        `;
+
+    const listItem = document.createElement('div');
+    const title = document.createElement('h2');
+    const background = document.createElement('div');
+    const image = document.createElement('img');
+    const dateP = document.createElement('p');
+    const desc = document.createElement('p');
+    const more = document.createElement('button');
 
 
 }
@@ -64,6 +66,7 @@ socket.emit('getUpcomingEvents');
 socket.on('upcomingEvents', (events) => {
     console.log('Événements à venir:', events);
     const upcomingList = document.querySelector('.upcoming-list');
+    eventList = events;
     upcomingList.innerHTML = '';
     events.forEach(event => {
         console.log("RECUPERATION DES DONNEES: "+ event.path);
