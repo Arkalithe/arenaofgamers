@@ -12,7 +12,7 @@ function showEventCards(events){
         const eventCard = document.createElement('div');
         eventCard.classList.add('card'); 
 
-        img = findImgById(event.image.path);
+        img = findImageById(event.image.path);
 
         eventCard.innerHTML= `
             <div class='cardE'>
