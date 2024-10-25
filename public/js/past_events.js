@@ -4,58 +4,58 @@ const socket = io();
 
 let eventList = [];
 
-function showEventCards(events){
-
-
-    events.forEach((event,index) => {
-        
-        const eventCard = document.createElement('div');
-        eventCard.classList.add('card'); 
-
-        img = findImageById(event.image.path);
-
-        eventCard.innerHTML= `
-            <div class='cardE'>
-            <div class = 'cardE-background' style='background-image: url(${img});'>
-            <h3 class='cardE-title'>${event.title}</h3>
-            <p class='cardE-p'> Organisé le <span>${event.createdAt}</span></p>
-            <button class="modalEvent" data-index="${index}" >Plus d'information ici</button>
-            </div>
-            </div>
-        `;
-        eventList.push(event);
-
-    });
-
-
-    const buttons = document.querySelectorAll('.modalEvent');
-    buy.forEach(btn=> {
-
-        btn.addEventListener('click',function() {
-
-            const index = this.getAttribute('data-index');
-            modalOpen(index);
-
-        });
-
-    });
-
-}
 
 
 
-function modalOpen(index){
+function modalOpen(ev){
 
-    const event = eventList[index];
     const eventDiv = document.querySelector('.eventDetails');
+    eventDiv.innerHTML='';
 
+    const close = document.querySelector('.close');
+    const content = document.querySelector('.content');
+    const bground = document.querySelector('.bground');
+    bground.style.display="block";
+    content.style.display = "flex";
     const listItem = document.createElement('div');
     const title = document.createElement('h2');
     const background = document.createElement('div');
     const image = document.createElement('img');
     const dateP = document.createElement('p');
     const desc = document.createElement('p');
-    const more = document.createElement('button');
+
+
+    listItem.classList.add('cardE');
+    title.textContent =`${ev.title}`;
+    title.classList.add('titleCard');
+    background.classList.add('cardE-background');
+    image.src=`${ev.path}`;
+    desc.classList.add('cardE-p');
+    desc.textContent=`${ev.description}`;
+    dateP.classList.add('cardE-p');
+    dateP.textContent=`Organisé le ${ev.date}`;
+
+
+    close.addEventListener('click',function(event){
+
+        bground.style.display = "none";
+        content.style.display = "none";
+
+    });
+
+
+
+    background.appendChild(dateP);
+    background.appendChild(desc);
+
+
+    listItem.appendChild(title);
+    listItem.appendChild(image);
+    listItem.appendChild(background);
+
+    eventDiv.appendChild(listItem)
+
+
 
 
 }
@@ -91,11 +91,12 @@ socket.on('pastEvents', (events) => {
         dateP.textContent=`Organisé le ${event.date}`;
         more.classList.add('modalEvent');
         more.textContent="Plus d'information ici";
-        // more.addEventListener('click',function(event){
+        more.addEventListener('click',function(e){
 
-        //     modalOpen(event.id);
+            modalOpen(event);
 
-        // });
+        });
+
 
         
         background.appendChild(dateP);
