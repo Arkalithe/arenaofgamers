@@ -134,7 +134,13 @@ const getUpcomingEvents = async () => {
             date: {
                 [Sequelize.Op.gt]: new Date()
             }
-        }
+        },
+        include: [{
+            model: Image,
+            where: {
+                imageId: Sequelize.col('image.id')
+            }
+        }]
     });
 };
 
