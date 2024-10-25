@@ -21,7 +21,7 @@ const Town = sequelize.define('town', {
         allowNull: false
     }
 }, {
-    timestamps: true
+    timestamps: true //  créeer automatiquement des attributs createdAt et updatedAT
 });
 const Inscription = sequelize.define('inscription', {
     id: {
