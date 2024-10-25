@@ -1,4 +1,4 @@
-const eventBoard = document.querySelector('.showPastEvents');
+
 const socket = io();
 
 
@@ -19,7 +19,7 @@ function showEventCards(events){
             <div class = 'cardE-background' style='background-image: url(${img});'>
             <h3 class='cardE-title'>${event.title}</h3>
             <p class='cardE-p'> Organisé le <span>${event.createdAt}</span></p>
-            <button class="modalEvent" data-index="${index} >Plus d'information ici</button>
+            <button class="modalEvent" data-index="${index}" >Plus d'information ici</button>
             </div>
             </div>
         `;
@@ -60,8 +60,47 @@ function modalOpen(index){
 }
 
 
-socket.on('chatMessage',(data)=>{
 
-    showEventCards(data);
 
+socket.emit('getPastEvents');
+socket.on('pastEvents', (events) => {
+    const pastList = document.getElementById('past-list');
+
+
+    
+    //pastList.innerHTML = '';
+    
+    events.map(event => {
+
+        //console.log("RECUPERATION DES DONNEES: "+ event.description);
+
+        const listItem = document.createElement('div');
+        const title = document.createElement('h2');
+        const background = document.createElement('div');
+        const image = document.createElement('img');
+        const dateP = document.createElement('p');
+        const more = document.createElement('button');
+        
+        listItem.classList.add('cardE');
+        title.textContent =`${event.title}`;
+        background.classList.add('cardE-background');
+        image.src=`${event.imageId.path}`;
+        dateP.classList.add('cardE-p')
+        dateP.textContent=`Organisé le ${event.date}`;
+        more.classList.add('modalEvent');
+        more.textContent="Plus d'information ici";
+        more.addEventListener('click',function(e){
+
+            modalOpen(event.id);
+
+        });
+
+        listItem.textContent = `${event.title} - ${new Date(event.date).toLocaleDateString()}`
+        pastList.appendChild(listItem);
+
+
+
+
+
+    });
 });

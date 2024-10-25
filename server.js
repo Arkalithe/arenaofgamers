@@ -10,20 +10,7 @@ const sequelize = new Sequelize('arenagamers', 'root', '', {
     dialect: 'mysql'
 });
 
-const Image = sequelize.define('image', {
-    id: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        autoIncrement: true,
-        primaryKey: true
-    },
-    path: {
-        type: DataTypes.STRING,
-        allowNull: false
-    }
-}, {
-    timestamps: true
-});
+
 const Town = sequelize.define('town', {
     id: {
         type: DataTypes.INTEGER,
