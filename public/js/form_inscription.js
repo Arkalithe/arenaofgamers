@@ -20,6 +20,7 @@ function validateForm() {
     const birthdate = document.getElementById("birthdate").value;
     const quantity = document.getElementById("quantity").value;
     const location = getChecked();
+    const terms = document.getElementById("condition").checked;
 
     // Validation des champs obligatoires
     if (prenom.length < 2 || !/^[a-zA-Z]+$/.test(prenom)) {
@@ -44,6 +45,10 @@ function validateForm() {
     }
     if (!location) {
         alert("Veuillez sélectionner une ville.");
+        return false;
+    }
+    if (!terms) {
+        alert("Veuillez acceptes les condition d'utilisation.");
         return false;
     }
 
